@@ -3,8 +3,13 @@ import React from 'react'
 import LoginForm from '../components/forms/LoginForm'
 
 const Login = () => {
+
+    const handleLogin = (user) => {
+        // Login user
+    }
+
     return (
-        <LoginForm />
+        <LoginForm login={handleLogin} />
     )
 }
 
