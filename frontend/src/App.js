@@ -10,6 +10,7 @@ import Navbar from './components/layout/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Search from './pages/Search';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/homepage' element={<HomePage />} />
       </Routes>
     </div>
   );
