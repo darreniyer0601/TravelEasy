@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+require('dotenv').config();
 
 const app = express();
 
@@ -8,13 +9,13 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 const connection = mysql.createConnection({
-    socketPath: '/cloudsql/traveleasy-334218:us-central1:traveleasy',
-    user: 'root',
-    password: 'cs348traveleasy',
-    database: 'travel_easy'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
-    if (err) console.log(err);
+    if (err) throw err;
     console.log('connected');
 })
