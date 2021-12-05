@@ -1,0 +1,26 @@
+{
+  "name": "traveleasy",
+  "version": "1.0.0",
+  "description": "CS 348",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darreniyer0601/TravelEasy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darreniyer0601/TravelEasy/issues"
+  },
+  "homepage": "https://github.com/darreniyer0601/TravelEasy#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  }
+}
