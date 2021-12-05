@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+/*import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom';
 
 import AuthContext from '../context/AuthContext';
@@ -16,4 +16,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     )
 }
 
-export default PrivateRoute
+export default PrivateRoute  */
