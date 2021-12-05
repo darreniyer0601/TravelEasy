@@ -19,7 +19,7 @@ const initialState = {
 const AuthState = (props) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-    const login = (user) => {
+    const login = async (user) => {
         try {
             const res = await axios.post('/api/login', user);
 
@@ -35,7 +35,7 @@ const AuthState = (props) => {
         }
     }
 
-    const signup = (user) => {
+    const signup = async (user) => {
         try {
             const res = await axios.post('/api/signup', user);
 
@@ -51,7 +51,7 @@ const AuthState = (props) => {
         }
     }
 
-    const logout = () => {
+    const logout = async () => {
         dispatch({
             type: LOGOUT
         })
