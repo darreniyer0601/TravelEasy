@@ -2,10 +2,10 @@ import React from 'react'
 
 import NewPlan from '../components/forms/NewPlan'
 
-const NewPlan = () => {
+const NewPlanPage = () => {
     return (
         <NewPlan />
     )
 }
 
-export default NewPlan'
+export default NewPlanPage
