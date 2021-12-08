@@ -27,7 +27,6 @@ const AuthState = (props) => {
                 type: AUTH_SUCCESS,
                 payload: {
                     token: res.data.token,
-                    user: res.data.user
                 }
             })
         } catch (err) {
@@ -37,15 +36,7 @@ const AuthState = (props) => {
 
     const signup = async (user) => {
         try {
-            const res = await axios.post('/api/signup', user);
-
-            dispatch({
-                type: AUTH_SUCCESS,
-                payload: {
-                    token: res.data.token,
-                    user: res.data.user
-                }
-            })
+            await axios.post('/api/signup', user);
         } catch (err) {
             throw err;
         }
