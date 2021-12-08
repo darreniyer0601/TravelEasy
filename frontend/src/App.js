@@ -1,30 +1,38 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Layout
-import Navbar from './components/layout/Navbar';
+import Navbar from "./components/layout/Navbar";
+import PrivateRoute from "./components/PrivateRoute";
 
 // Pages
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import NewPlanPage from './pages/NewPlanPage';
 import Search from './pages/Search';
 import HomePage from './pages/HomePage';
 
+// Context
+import AuthState from "./context/Auth/AuthState";
+
 function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        {/* <Route path='' element={} /> */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/search' element={<Search />} />
-        <Route path='/homepage' element={<HomePage />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+			<AuthState>
+				<Navbar />
+				<Routes>
+					{/* <PrivateRoute path='/' element={<Home />} /> */}
+          <Route path='/newplan' element={<NewPlanPage />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/homepage' element={<HomePage />} />
+				</Routes>
+			</AuthState>
+		</div>
+	);
 }
 
 export default App;
