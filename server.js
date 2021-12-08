@@ -1,5 +1,8 @@
 const express = require('express');
-const mysql = require('mysql');
+const { connect } = require('./util/db');
+
+const userRoutes = require('./routes/user');
+
 require('dotenv').config();
 
 const app = express();
@@ -8,14 +11,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-});
+app.use('/api/user', userRoutes);
 
-connection.connect((err) => {
-    if (err) throw err;
-    console.log('connected');
-})
+connect().then(() => {
+    console.log('MySQL Connected...');
+    app.listen(5000, () => {
+        console.log('Server started on port 5000');
+    })
+}).catch(err => {
+    console.error(err);
+}) 
