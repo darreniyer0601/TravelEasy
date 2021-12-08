@@ -16,20 +16,21 @@ import HomePage from './pages/HomePage';
 
 // Context
 import AuthState from "./context/Auth/AuthState";
+import ItenaryState from "./context/Itenary.js/ItenaryState";
 
 function App() {
 	return (
 		<div className="App">
 			<AuthState>
-				<Navbar />
-				<Routes>
-					{/* <PrivateRoute path='/' element={<Home />} /> */}
-          <Route path='/newplan' element={<NewPlanPage />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/signup" element={<Signup />} />
-          <Route path='/search' element={<Search />} />
-          <Route path='/homepage' element={<HomePage />} />
-				</Routes>
+				<ItenaryState>
+					<Navbar />
+					<Routes>
+						{/* <PrivateRoute path='/' element={<Home />} /> */}
+						<Route path="/newplan" element={<NewPlanPage />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/signup" element={<Signup />} />
+					</Routes>
+				</ItenaryState>
 			</AuthState>
 		</div>
 	);
