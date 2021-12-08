@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
+// Register routes
 app.use('/api/user', userRoutes);
 
 connect().then(() => {
