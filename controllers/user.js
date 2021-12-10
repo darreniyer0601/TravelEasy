@@ -32,7 +32,11 @@ exports.login = async (req, res) => {
 
 			jwt.sign(payload, process.env.jwtSecret, (err, token) => {
 				if (err) throw err;
-				res.status(200).json({ token, user });
+				res.status(200).json({ token, user: {
+					id: user.id,
+					email: user.email,
+					name: user.name
+				} });
 			});
 		});
 	} catch (err) {

@@ -1,22 +1,19 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const isAuth = (req, res, next) => {
+module.exports = (req, res, next) => {
     const token = req.headers('Authorization');
+
+    if (!token) {
+        return res.status(401).json({ msg: 'Not authorized' });
+    }
 
     try {
         const decodedToken = jwt.verify(token, process.env.jwtSecret);
 
-        if (!decodedToken) {
-            return res.status(401).json({ msg: 'Not authorized' });
-        }
-
         req.user = decodedToken.user;
-
         next();
     } catch (err) {
         throw err;
     }
 }
-
-export default isAuth;

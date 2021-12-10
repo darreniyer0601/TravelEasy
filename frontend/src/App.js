@@ -14,7 +14,7 @@ import NewPlanPage from "./pages/NewPlanPage";
 
 // Context
 import AuthState from "./context/Auth/AuthState";
-import ItenaryState from "./context/Itenary.js/ItenaryState";
+import ItenaryState from "./context/Itenary/ItenaryState";
 
 function App() {
 	return (

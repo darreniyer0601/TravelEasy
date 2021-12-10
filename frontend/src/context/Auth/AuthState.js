@@ -6,13 +6,12 @@ import AuthReducer from "./AuthReducer";
 
 import {
     AUTH_SUCCESS,
-    AUTH_FAIL,
     LOGOUT
 } from '../types';
 
 const initialState = {
     authenticated: localStorage.getItem('token') ? true : false,
-    user: localStorage.getItem('user') || null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     token: localStorage.getItem('token') || null
 }
 
@@ -21,8 +20,10 @@ const AuthState = (props) => {
 
     const login = async (user) => {
         try {
-            const res = await axios.post('/api/login', user);
+            console.log(user);
+            const res = await axios.post('/api/user/login', user);
 
+            console.log(res);
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: {
@@ -37,7 +38,7 @@ const AuthState = (props) => {
 
     const signup = async (user) => {
         try {
-            await axios.post('/api/signup', user);
+            await axios.post('/api/user/signup', user);
         } catch (err) {
             throw err;
         }
