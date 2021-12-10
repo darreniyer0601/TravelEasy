@@ -27,6 +27,7 @@ const AuthState = (props) => {
                 type: AUTH_SUCCESS,
                 payload: {
                     token: res.data.token,
+                    user: res.data.user
                 }
             })
         } catch (err) {
