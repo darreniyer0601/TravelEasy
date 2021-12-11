@@ -6,13 +6,14 @@ import AuthReducer from "./AuthReducer";
 
 import {
     AUTH_SUCCESS,
-    AUTH_FAIL,
     LOGOUT
 } from '../types';
 
+axios.defaults.baseURL = 'http://localhost:5000/';
+
 const initialState = {
     authenticated: localStorage.getItem('token') ? true : false,
-    user: localStorage.getItem('user') || null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     token: localStorage.getItem('token') || null
 }
 
@@ -21,24 +22,33 @@ const AuthState = (props) => {
 
     const login = async (user) => {
         try {
-            const res = await axios.post('/api/login', user);
+            console.log(user);
+            const res = await axios.post('/api/user/login', user);
 
+            console.log(res);
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: {
                     token: res.data.token,
+                    user: res.data.user
                 }
             })
         } catch (err) {
-            throw err;
+            if (err.response) {
+                throw new Error(err.response.data.msg);
+            }
         }
     }
 
     const signup = async (user) => {
         try {
-            await axios.post('/api/signup', user);
+            await axios.post('/api/user/signup', user);
         } catch (err) {
-            throw err;
+            if (err.response) {
+                throw new Error(err.response.data.msg);
+            } else {
+                throw new Error('Something went wrong');
+            }
         }
     }
 
