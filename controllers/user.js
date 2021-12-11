@@ -49,14 +49,14 @@ exports.signup = async (req, res) => {
 	const { email, name, password } = req.body;
 
 	try {
-		const hashedPassword = await bcrypt.hash(password, 12);
+		const hashedPassword = await bcrypt.hash(password, 8);
 
 		db.query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;", (err) => {
 			if (err) throw err;
 
             db.beginTransaction();
 
-			const sql = `insert into users (email, name, password, role) values ("${email}", "${name}","${hashedPassword}", "admin");`;
+			const sql = `insert into users (email, name, password, role) values ("${email}", "${name}","${hashedPassword}", "customer");`;
 			db.query(sql, (err, result) => {
 				if (err) throw err;
 

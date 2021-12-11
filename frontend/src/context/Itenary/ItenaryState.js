@@ -4,6 +4,8 @@ import axios from "axios";
 import ItenaryContext from "./ItenaryContext";
 import ItenaryReducer from "./ItenaryReducer";
 
+axios.defaults.baseURL = 'http://localhost:5000/';
+
 const initialState = {
     itenaries: [],
     hotels: [],
