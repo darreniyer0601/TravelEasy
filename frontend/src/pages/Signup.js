@@ -14,12 +14,12 @@ const Signup = () => {
             alert('Successfully registered');
             navigate('/login');
         } catch (err) {
-            alert('Something went wrong');
+            alert(err.message);
         }
     }
 
     return (
-        <SignupForm />
+        <SignupForm signup={handleSignup} />
     )
 }
 

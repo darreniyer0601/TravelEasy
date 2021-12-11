@@ -9,6 +9,8 @@ import {
     LOGOUT
 } from '../types';
 
+axios.defaults.baseURL = 'http://localhost:5000/';
+
 const initialState = {
     authenticated: localStorage.getItem('token') ? true : false,
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
@@ -32,7 +34,9 @@ const AuthState = (props) => {
                 }
             })
         } catch (err) {
-            throw err;
+            if (err.response) {
+                throw new Error(err.response.data.msg);
+            }
         }
     }
 
@@ -40,7 +44,11 @@ const AuthState = (props) => {
         try {
             await axios.post('/api/user/signup', user);
         } catch (err) {
-            throw err;
+            if (err.response) {
+                throw new Error(err.response.data.msg);
+            } else {
+                throw new Error('Something went wrong');
+            }
         }
     }
 

@@ -14,7 +14,7 @@ const Login = () => {
             await login(user);
             navigate('/');
         } catch (err) {
-            alert('Something went wrong');
+            alert(err.message);
         }
     }
 

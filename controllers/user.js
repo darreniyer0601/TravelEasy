@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
 
 	try {
 		const sql = `select * from users where email = "${email}"`;
-		db.query(sql, (err, result) => {
+		db.query(sql, async (err, result) => {
 			if (err) throw err;
 
 			if (result.length === 0) {
@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
 
 			const user = result[0];
 
-			const passwordsMatch = bcrypt.compare(password, user.password);
+			const passwordsMatch = await bcrypt.compare(password, user.password);
 
 			if (!passwordsMatch) {
 				return res.status(401).json({ msg: "Passwords do not match" });
