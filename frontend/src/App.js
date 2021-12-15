@@ -8,6 +8,7 @@ import Navbar from "./components/layout/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 
 // Pages
+import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewPlanPage from "./pages/NewPlanPage";
@@ -23,7 +24,7 @@ function App() {
 				<ItenaryState>
 					<Navbar />
 					<Routes>
-						{/* <PrivateRoute path='/' element={<Home />} /> */}
+						<Route path='/' element={<Home />} />
 						<Route path="/newplan" element={<NewPlanPage />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />

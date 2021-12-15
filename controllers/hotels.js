@@ -6,9 +6,9 @@ exports.getHotels = (req, res) => {
     try {
         db.query(sql, (err, result) => {
             if (err) throw err;
-            console.log(result);
+            // console.log(result);
     
-            res.status(200).json({ result });
+            res.status(200).json({ hotels: result });
         })
     } catch (err) {
         console.error(err.message);

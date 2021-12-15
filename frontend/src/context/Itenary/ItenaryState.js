@@ -4,6 +4,10 @@ import axios from "axios";
 import ItenaryContext from "./ItenaryContext";
 import ItenaryReducer from "./ItenaryReducer";
 
+import {
+    HOTELS_LOADED
+} from '../types';
+
 axios.defaults.baseURL = 'http://localhost:5000/';
 
 const initialState = {
@@ -25,6 +29,18 @@ const ItenaryState = (props) => {
     const [state, dispatch] = useReducer(ItenaryReducer, initialState);
 
     // Fetch hotels from backend
+    const getHotels = async () => {
+        try {
+            const res = await axios.get('/api/hotels');
+
+            dispatch({
+                type: HOTELS_LOADED,
+                payload: res.data.hotels
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // Fetch cities from backend
 
@@ -49,7 +65,7 @@ const ItenaryState = (props) => {
     return (
         <ItenaryContext.Provider value={{
             ...state,
-            // Functions go here
+            getHotels
         }}>
             {props.children}
         </ItenaryContext.Provider>

@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 // Register routes
 app.use('/api/user', userRoutes);
 app.use('/api/itenary', itenaryRoutes);
-app.use('/api/route', routeRoutes);
-app.use('/api/hotel', hotelRoutes);
+app.use('/api/routes', routeRoutes);
+app.use('/api/hotels', hotelRoutes);
 
 connect().then(() => {
     console.log('MySQL Connected...');

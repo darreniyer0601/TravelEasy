@@ -4,6 +4,6 @@ const router = express.Router();
 const hotelController = require('../controllers/hotels');
 const isAuth = require('../util/isAuth');
 
-router.get('/', isAuth, hotelController.getHotels);
+router.get('/', hotelController.getHotels);
 
 module.exports = router;
