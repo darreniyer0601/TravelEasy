@@ -18,7 +18,8 @@ const initialState = {
 const ItenaryContext = React.createContext({
     ...initialState,
     getHotels: () => {},
-    
+    getVehicles: () => {},
+    getCities: () => {}
 });
 
 export default ItenaryContext;

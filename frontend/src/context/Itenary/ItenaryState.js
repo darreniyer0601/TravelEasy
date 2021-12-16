@@ -5,7 +5,9 @@ import ItenaryContext from "./ItenaryContext";
 import ItenaryReducer from "./ItenaryReducer";
 
 import {
-    HOTELS_LOADED
+    HOTELS_LOADED,
+    VEHICLES_LOADED,
+    CITIES_LOADED
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5000/';
@@ -43,8 +45,32 @@ const ItenaryState = (props) => {
     }
 
     // Fetch cities from backend
+    const getCities = async (req, res) => {
+        try {
+            const res = await axios.get('/api/cities');
+
+            dispatch({
+                type: CITIES_LOADED,
+                payload: res.data.cities
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // Fetch vehicles from backend
+    const getVehicles = async (req, res) => {
+        try {
+            const res = await axios.get('/api/vehicles');
+
+            dispatch({
+                type: VEHICLES_LOADED,
+                payload: res.data.vehicles
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // Fetch itenaries from backend
 
@@ -65,7 +91,9 @@ const ItenaryState = (props) => {
     return (
         <ItenaryContext.Provider value={{
             ...state,
-            getHotels
+            getHotels,
+            getVehicles,
+            getCities
         }}>
             {props.children}
         </ItenaryContext.Provider>

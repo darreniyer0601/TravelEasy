@@ -3,3 +3,9 @@ export const LOGOUT = 'LOGOUT';
 
 export const HOTELS_LOADED = 'HOTELS_LOADED';
 export const HOTEL_SELECTED = 'HOTEL_SELECTED';
+
+export const VEHICLES_LOADED = 'VEHICLES_LOADED';
+export const VEHICLE_SELECTED = 'VEHICLE_SELECTED';
+
+export const CITIES_LOADED = 'CITIES_LOADED';
+export const CITY_SELECTED = 'CITY_SELECTED';
