@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const NewPlan = (props) => {
+import HotelSelect from './HotelSelect';
+import CitySelect from './CitySelect';
+import VehicleSelect from './VehicleSelect';
+
+const NewTripForm = (props) => {
     const [formData, setFormData] = useState({
         title: '',
 		location: '',
@@ -26,7 +30,7 @@ const NewPlan = (props) => {
         <form onSubmit={handleSubmit}>
 			<div className="form-group m-3">
 				<label>title</label>
-				<input    //placeholder
+				<input
 					name="Title"
 					type="title"
 					className="form-control"
@@ -80,10 +84,10 @@ const NewPlan = (props) => {
 				/>
 			</div>
 			<button type="submit" className="btn btn-dark">
-				Login
+				Submit
 			</button>
 		</form>
     )
 }
 
-export default NewPlan
+export default NewTripForm

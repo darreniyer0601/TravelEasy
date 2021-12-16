@@ -2,7 +2,13 @@ import {
     HOTELS_LOADED,
     VEHICLES_LOADED,
     CITIES_LOADED,
-    ITENARIES_LOADED
+    ITENARIES_LOADED,
+    HOTEL_SELECTED,
+    VEHICLE_SELECTED,
+    ORIGIN_SELECTED,
+    DESTINATION_SELECTED,
+    DAYS_ALLOCATED,
+    TRAVEL_TIME_SET
 } from '../types';
 
 const ItenaryReducer = (state, action) => {
@@ -26,6 +32,55 @@ const ItenaryReducer = (state, action) => {
             return {
                 ...state,
                 itenaries: action.payload
+            }
+        case HOTEL_SELECTED:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    hotel: action.payload.id,
+                    hotel_price: action.payload.price_per_night
+                }
+            }
+        case VEHICLE_SELECTED:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    vehicle: action.payload
+                }
+            }
+        case ORIGIN_SELECTED:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    origin: action.payload
+                }
+            }
+        case DESTINATION_SELECTED:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    destination: action.payload
+                }
+            }
+        case DAYS_ALLOCATED:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    days: action.payload
+                }
+            }
+        case TRAVEL_TIME_SET:
+            return {
+                ...state,
+                itenary: {
+                    ...state.itenary,
+                    travel_time: action.payload
+                }
             }
         default: 
             return {

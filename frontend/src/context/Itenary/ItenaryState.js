@@ -8,7 +8,13 @@ import {
     HOTELS_LOADED,
     VEHICLES_LOADED,
     CITIES_LOADED,
-    ITENARIES_LOADED
+    ITENARIES_LOADED,
+    HOTEL_SELECTED,
+    ORIGIN_SELECTED,
+    DESTINATION_SELECTED,
+    VEHICLE_SELECTED,
+    DAYS_ALLOCATED,
+    TRAVEL_TIME_SET
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5000/';
@@ -24,7 +30,8 @@ const initialState = {
         vehicle: null,
         hotel: null,
         days: 0,
-        travel_time: 0
+        travel_time: 0,
+        hotel_price: 0,
     }
 }
 
@@ -88,18 +95,59 @@ const ItenaryState = (props) => {
     }
 
     // Select hotel
+    const setHotel = (id) => {
+        console.log(id);
+        const hotel = state.hotels.find(h => parseInt(id) === h.id);
+
+        dispatch({
+            type: HOTEL_SELECTED,
+            payload: hotel
+        })
+    }
 
     // Select origin
+    const setOrigin = (id) => {
+        dispatch({
+            type: ORIGIN_SELECTED,
+            payload: id
+        })
+    }
 
     // Select destination
+    const setDestination = (id) => {
+        dispatch({
+            type: DESTINATION_SELECTED,
+            payload: id
+        })
+    }
 
     // Select vehicle
+    const setVehicle = (id) => {
+        dispatch({
+            type: VEHICLE_SELECTED,
+            payload: id
+        })
+    }
 
     // Set number of days
+    const allocateDays = (num) => {
+        dispatch({
+            type: DAYS_ALLOCATED,
+            payload: num
+        })
+    }
 
     // Set travel time
+    const setTravelTime = (time) => {
+        dispatch({
+            type: TRAVEL_TIME_SET,
+            payload: time
+        })
+    }
 
     // Add itenary
+
+    
 
     return (
         <ItenaryContext.Provider value={{
@@ -107,7 +155,13 @@ const ItenaryState = (props) => {
             getHotels,
             getVehicles,
             getCities,
-            getItenaries
+            getItenaries,
+            setHotel,
+            setOrigin,
+            setDestination,
+            setVehicle,
+            allocateDays,
+            setTravelTime
         }}>
             {props.children}
         </ItenaryContext.Provider>

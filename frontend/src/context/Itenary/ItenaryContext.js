@@ -20,7 +20,13 @@ const ItenaryContext = React.createContext({
     getHotels: () => {},
     getVehicles: () => {},
     getCities: () => {},
-    getItenaries: () => {}
+    getItenaries: () => {},
+    setHotel: (id) => {},
+    setOrigin: (id) => {},
+    setDestination: (id) => {},
+    setVehicle: (id) => {},
+    allocateDays: (num) => {},
+    setTravelTime: (time) => {}
 });
 
 export default ItenaryContext;

@@ -11,7 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import NewPlanPage from "./pages/NewPlanPage";
+import NewTripPage from "./pages/NewTripPage";
 import MyTripsPage from "./pages/MyTripsPage";
 import ExplorePage from "./pages/ExplorePage";
 
@@ -29,7 +29,7 @@ function App() {
 						<Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
 						<Route path='/explore' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
 						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
-						<Route path="/newplan" element={<PrivateRoute><NewPlanPage /></PrivateRoute>} />
+						<Route path="/newtrip" element={<PrivateRoute><NewTripPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>
