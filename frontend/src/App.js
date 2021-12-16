@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewPlanPage from "./pages/NewPlanPage";
+import MyTripsPage from "./pages/MyTripsPage";
+import ExplorePage from "./pages/ExplorePage";
 
 // Context
 import AuthState from "./context/Auth/AuthState";
@@ -24,8 +26,10 @@ function App() {
 				<ItenaryState>
 					<Navbar />
 					<Routes>
-						<Route path='/' element={<Home />} />
-						<Route path="/newplan" element={<NewPlanPage />} />
+						<Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
+						<Route path='/explore' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
+						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
+						<Route path="/newplan" element={<PrivateRoute><NewPlanPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>

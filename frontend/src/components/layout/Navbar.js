@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import AuthContext from "../../context/Auth/AuthContext";
 
 const Navbar = () => {
-    const { authenticated, logout } = useContext(AuthContext);
+	const { authenticated, logout } = useContext(AuthContext);
 
-    const handleLogout = () => {
-        logout();
-    }
+	const handleLogout = () => {
+		logout();
+	};
 
 	const authLinks = (
 		<>
@@ -38,11 +38,27 @@ const Navbar = () => {
 			<a className="navbar-brand m-2" href="/">
 				TravelEasy
 			</a>
-            <ul className="navbar-nav">
-                <NavLink to=''>
-
-                </NavLink>
-            </ul>
+			<ul className="navbar-nav">
+				{authenticated && (
+					<Fragment>
+						<li className="nav-item">
+							<NavLink className="nav-link" to="/explore">
+								Explore
+							</NavLink>
+						</li>
+						<li className="nav-item">
+							<NavLink className="nav-link" to="/mytrips">
+								MyTrips
+							</NavLink>
+						</li>
+						<li className="nav-item">
+							<NavLink className="nav-link" to="/newplan">
+								NewTrip
+							</NavLink>
+						</li>
+					</Fragment>
+				)}
+			</ul>
 			<ul className="navbar-nav position-absolute end-0 m-2">
 				{authenticated ? logoutButton : authLinks}
 			</ul>
