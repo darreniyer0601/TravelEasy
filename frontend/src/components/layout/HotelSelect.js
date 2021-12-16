@@ -18,7 +18,6 @@ const HotelSelect = () => {
 
 	return (
 		<select className="form-select" onChange={handleChange}>
-            <option selected>Select a Hotel</option>
 			{hotels.map((hotel) => (
 				<option id={hotel.id} value={hotel.id}>
 					{hotel.name} : ${hotel.price_per_night}

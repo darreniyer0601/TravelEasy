@@ -18,7 +18,6 @@ const VehicleSelect = () => {
 
     return (
         <select className="form-select" onChange={handleChange}>
-            <option selected>Select a Hotel</option>
 			{vehicles.map((vehicle) => (
 				<option id={vehicle.id} value={vehicle.id}>
 					{vehicle.type} : ${vehicle.price_per_hour}

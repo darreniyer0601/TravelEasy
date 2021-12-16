@@ -7,6 +7,7 @@ const itenaryRoutes = require('./routes/itenaries');
 const routeRoutes = require('./routes/route');
 const hotelRoutes = require('./routes/hotels');
 const vehicleRoutes = require('./routes/transport');
+const cityRoutes = require('./routes/cities');
 
 require('dotenv').config();
 
@@ -28,6 +29,7 @@ app.use('/api/itenary', itenaryRoutes);
 app.use('/api/routes', routeRoutes);
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/cities', cityRoutes);
 
 connect().then(() => {
     console.log('MySQL Connected...');

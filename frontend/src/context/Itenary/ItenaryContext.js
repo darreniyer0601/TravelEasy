@@ -25,8 +25,9 @@ const ItenaryContext = React.createContext({
     setOrigin: (id) => {},
     setDestination: (id) => {},
     setVehicle: (id) => {},
-    allocateDays: (num) => {},
-    setTravelTime: (time) => {}
+    allocateDays: (dates) => {},
+    setTravelTime: (time) => {},
+    addItenary: () => {}
 });
 
 export default ItenaryContext;

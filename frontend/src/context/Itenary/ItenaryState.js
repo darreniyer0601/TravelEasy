@@ -130,10 +130,16 @@ const ItenaryState = (props) => {
     }
 
     // Set number of days
-    const allocateDays = (num) => {
+    const allocateDays = (dates) => {
+        const d1 = new Date(dates.start_date);
+		const d2 = new Date(dates.end_date);
+
+		const diff = d2.getTime() - d1.getTime();
+		const days = diff / (1000 * 3600 * 24);
+
         dispatch({
             type: DAYS_ALLOCATED,
-            payload: num
+            payload: days
         })
     }
 
@@ -146,7 +152,13 @@ const ItenaryState = (props) => {
     }
 
     // Add itenary
-
+    const addItenary = async () => {
+        try {
+            
+        } catch (err) {
+            console.log(err);
+        }
+    }
     
 
     return (
@@ -161,7 +173,8 @@ const ItenaryState = (props) => {
             setDestination,
             setVehicle,
             allocateDays,
-            setTravelTime
+            setTravelTime,
+            addItenary
         }}>
             {props.children}
         </ItenaryContext.Provider>

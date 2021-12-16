@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import NewTripForm from '../components/forms/NewTripForm'
+import NewTripForm from "../components/forms/NewTripForm";
 
 const NewTripPage = () => {
-    return (
-        <NewTripForm /> 
-    )
-}
+	return (
+		<div className="text-center">
+			<NewTripForm />
+		</div>
+	);
+};
 
-export default NewTripPage
+export default NewTripPage;
