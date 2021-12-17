@@ -137,7 +137,7 @@ const ItenaryState = (props) => {
 		const d2 = new Date(dates.end_date);
 
 		const diff = d2.getTime() - d1.getTime();
-		const days = diff / (1000 * 3600 * 24);
+		const days = diff / (1000 * 3600 * 24) + 1;
 
         dispatch({
             type: DAYS_ALLOCATED,
@@ -162,7 +162,7 @@ const ItenaryState = (props) => {
                 destination: state.itenary.destination
             }
 
-            await axios.post('/api/route', body);
+            await axios.post('/api/routes', body);
 
             // Get created route
             let res = await axios.get('/api/routes');
@@ -171,7 +171,7 @@ const ItenaryState = (props) => {
 
             // Add vehicle_route using route, vehicle and travel time
             body = {
-                vehicle: state.itenary.vehicle,
+                vehicle_id: state.itenary.vehicle,
                 route_id,
                 travel_time: state.itenary.travel_time
             }

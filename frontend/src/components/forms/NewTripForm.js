@@ -10,12 +10,16 @@ import DestinationSelect from "../layout/DestinationSelect";
 import DateForm from "./DateForm";
 
 const NewTripForm = (props) => {
-	const { addItenary, allocateDays, setTravelTime } = useContext(ItenaryContext);
+	const { allocateDays, setTravelTime } = useContext(ItenaryContext);
 	const [showToast, setShowToast] = useState(false);
 
 	const handleClose = () => {
 		setShowToast(false);
 	};
+
+	const handleDateSelect = () => {
+		setShowToast(true);
+	}
 
 	const handleDates = (dates) => {
 		allocateDays(dates);
@@ -24,7 +28,7 @@ const NewTripForm = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		addItenary();
+		props.addItenary();
 	};
 
 	const handleChange = (e) => {
@@ -61,8 +65,9 @@ const NewTripForm = (props) => {
 				<HotelSelect />
 			</div>
 			<button
+				type="button"
 				className="btn btn-warning m-3"
-				onClick={() => setShowToast(true)}
+				onClick={handleDateSelect}
 			>
 				Select Dates
 			</button>

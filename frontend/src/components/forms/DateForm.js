@@ -13,13 +13,12 @@ const DateForm = (props) => {
 		})
 	}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         props.setDates(formData);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <div className="form-group m-3">
 				<label>From</label>
 				<input
@@ -40,7 +39,7 @@ const DateForm = (props) => {
 					onChange={handleChange}
 				/>
 			</div>
-            <button type="submit" className="btn btn-light">
+            <button type='button' className="btn btn-light" onClick={handleSubmit}>
 				Finalize
 			</button>
         </form>
