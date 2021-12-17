@@ -2,9 +2,8 @@ const mysql = require('mysql');
 require('dotenv').config();
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'cs348'
+    host: '348',
+    user: 'root',        
 });
 
 const connect = () => {
