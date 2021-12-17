@@ -47,7 +47,8 @@ const ItenaryReducer = (state, action) => {
                 ...state,
                 itenary: {
                     ...state.itenary,
-                    vehicle: action.payload
+                    vehicle: action.payload.id,
+                    vehicle_price: action.payload.price_per_hour
                 }
             }
         case ORIGIN_SELECTED:
@@ -71,7 +72,7 @@ const ItenaryReducer = (state, action) => {
                 ...state,
                 itenary: {
                     ...state.itenary,
-                    days: action.payload
+                    days: action.payload,
                 }
             }
         case TRAVEL_TIME_SET:

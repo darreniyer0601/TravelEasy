@@ -32,6 +32,7 @@ const initialState = {
         days: 0,
         travel_time: 0,
         hotel_price: 0,
+        vehicle_price: 0,
     }
 }
 
@@ -96,7 +97,6 @@ const ItenaryState = (props) => {
 
     // Select hotel
     const setHotel = (id) => {
-        console.log(id);
         const hotel = state.hotels.find(h => parseInt(id) === h.id);
 
         dispatch({
@@ -123,9 +123,11 @@ const ItenaryState = (props) => {
 
     // Select vehicle
     const setVehicle = (id) => {
+        const vehicle = state.vehicles.find(v => parseInt(id) === v.id);
+
         dispatch({
             type: VEHICLE_SELECTED,
-            payload: id
+            payload: vehicle
         })
     }
 
@@ -152,15 +154,56 @@ const ItenaryState = (props) => {
     }
 
     // Add itenary
-    const addItenary = async () => {
+    const addItenary = async (userId) => {
         try {
+            // Add route using origin and destination
+            let body = {
+                origin: state.itenary.origin,
+                destination: state.itenary.destination
+            }
+
+            await axios.post('/api/route', body);
+
+            // Get created route
+            let res = await axios.get('/api/routes');
+
+            const route_id = res.data.result.id;
+
+            // Add vehicle_route using route, vehicle and travel time
+            body = {
+                vehicle: state.itenary.vehicle,
+                route_id,
+                travel_time: state.itenary.travel_time
+            }
+
+            await axios.post('/api/itenaries/vehicleroute', body);
+
+            // Get vehicle_route
+            res = await axios.get('/api/itenaries/vehicleroute');
+
+            const route = res.data.result.id;
+
+            // Calculate price using travel time + hotel days
+            let price = 0;
+            price += state.itenary.travel_time * state.itenary.vehicle_price;
+            price += state.itenary.hotel_price * state.itenary.days;
             
+            // Create itenary object
+            body = {
+                days: state.itenary.days,
+                hotel: state.itenary.hotel,
+                route,
+                price,
+                user_id: userId
+            }
+
+            // Add itenary object
+            await axios.post('/api/itenaries', body);
         } catch (err) {
             console.log(err);
         }
     }
     
-
     return (
         <ItenaryContext.Provider value={{
             ...state,

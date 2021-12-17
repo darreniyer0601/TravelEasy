@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 // Register routes
 app.use('/api/user', userRoutes);
-app.use('/api/itenary', itenaryRoutes);
+app.use('/api/itenaries', itenaryRoutes);
 app.use('/api/routes', routeRoutes);
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/vehicles', vehicleRoutes);

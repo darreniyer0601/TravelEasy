@@ -7,6 +7,10 @@ router.get('/', itenaryController.getItenaries);
 
 router.post('/', itenaryController.addItenary);
 
+router.post('/vehicleroute', itenaryController.addVehicleRoute);
+
+router.get('/vehicleroute', itenaryController.getVehicleRoute);
+
 router.delete('/:id', itenaryController.deleteItenary);
 
 module.exports = router;
