@@ -49,7 +49,9 @@ const ItenaryState = (props) => {
                 payload: res.data.hotels
             })
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
         }
     }
 
@@ -63,7 +65,9 @@ const ItenaryState = (props) => {
                 payload: res.data.cities
             })
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
         }
     }
 
@@ -77,7 +81,9 @@ const ItenaryState = (props) => {
                 payload: res.data.vehicles
             })
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
         }
     }
 
@@ -91,7 +97,9 @@ const ItenaryState = (props) => {
                 payload: res.data.itenaries
             })
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
         }
     }
 
@@ -200,7 +208,9 @@ const ItenaryState = (props) => {
             // Add itenary object
             await axios.post('/api/itenaries', body);
         } catch (err) {
-            console.log(err);
+            if (err.response) {
+                throw new Error(err.response.data.msg);
+            }
         }
     }
     
