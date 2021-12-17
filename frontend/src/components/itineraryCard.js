@@ -1,28 +1,30 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image'
+import React from "react";
+import Card from "react-bootstrap/Card";
 
-const ItineraryCard = (props) => {
-    return (
-        <Card style={{ width: '50rem'}}>
-            <div class="row no-gutters">
-            <div class="col-auto">
-                <Card.Img src="https://picsum.photos/300/200" class="img-fluid" alt=""></Card.Img>
-            </div>  
-            <div class="col">
-                <Card.Body>
-                    <Card.Title>{props.p.description}</Card.Title>
-                    <Card.Text>{props.p.date}</Card.Text>
-                    <Card.Text>{props.p.price}</Card.Text>
-                    <Card.Text>{props.p.location}</Card.Text>
-                </Card.Body>
-            </div>
-            </div>
-        </Card>
-    )
+const ItineraryCard = ({ itenary }) => {
+	return (
+		<Card style={{ width: "45rem" }} className="m-3">
+			<div class="row no-gutters">
+				<div class="col-auto">
+					<Card.Img
+						src={`https://picsum.photos/id/${itenary.id * (100 - Math.random(10).toFixed())}/300/200`}
+						class="img-fluid"
+						alt=""
+					></Card.Img>
+				</div>
+				<div class="col">
+					<Card.Body>
+						<Card.Title>Itenary #{itenary.id}</Card.Title>
+						<Card.Text>From: {itenary.origin}</Card.Text>
+						<Card.Text>To: {itenary.destination}</Card.Text>
+						<Card.Text>Staying At: {itenary.hotel}</Card.Text>
+						<Card.Text>For {itenary.days} days</Card.Text>
+						<Card.Text>Expenditure: ${itenary.price}</Card.Text>
+					</Card.Body>
+				</div>
+			</div>
+		</Card>
+	);
+};
 
-}
-
-export default ItineraryCard
-
+export default ItineraryCard;
