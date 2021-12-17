@@ -14,7 +14,8 @@ import {
     DESTINATION_SELECTED,
     VEHICLE_SELECTED,
     DAYS_ALLOCATED,
-    TRAVEL_TIME_SET
+    TRAVEL_TIME_SET,
+    ITENARY_ADDED
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5000/';
@@ -200,7 +201,12 @@ const ItenaryState = (props) => {
             }
 
             // Add itenary object
-            await axios.post('/api/itenaries', body);
+            res = await axios.post('/api/itenaries', body);
+
+            dispatch({
+                type: ITENARY_ADDED,
+                payload: res.data.itenary
+            })
         } catch (err) {
             if (err.response) {
                 throw new Error(err.response.data.msg);
