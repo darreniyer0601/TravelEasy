@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
 
 	try {
 		const sql = `select * from users where email = "${email}"`;
-		db.query(sql, (err, result) => {
+		db.query(sql, async (err, result) => {
 			if (err) throw err;
 
 			if (result.length === 0) {
@@ -18,19 +18,25 @@ exports.login = async (req, res) => {
 
 			const user = result[0];
 
-			const passwordsMatch = bcrypt.compare(password, user.password);
+			const passwordsMatch = await bcrypt.compare(password, user.password);
 
 			if (!passwordsMatch) {
 				return res.status(401).json({ msg: "Passwords do not match" });
 			}
 
 			const payload = {
-				user,
+				user: {
+					id: user.id
+				},
 			};
 
 			jwt.sign(payload, process.env.jwtSecret, (err, token) => {
 				if (err) throw err;
-				res.status(200).json({ token });
+				res.status(200).json({ token, user: {
+					id: user.id,
+					email: user.email,
+					name: user.name
+				} });
 			});
 		});
 	} catch (err) {
@@ -43,14 +49,14 @@ exports.signup = async (req, res) => {
 	const { email, name, password } = req.body;
 
 	try {
-		const hashedPassword = await bcrypt.hash(password, 12);
+		const hashedPassword = await bcrypt.hash(password, 8);
 
 		db.query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;", (err) => {
 			if (err) throw err;
 
             db.beginTransaction();
 
-			const sql = `insert into users (email, name, password, role) values ("${email}", "${name}","${hashedPassword}", "admin");`;
+			const sql = `insert into users (email, name, password, role) values ("${email}", "${name}","${hashedPassword}", "customer");`;
 			db.query(sql, (err, result) => {
 				if (err) throw err;
 

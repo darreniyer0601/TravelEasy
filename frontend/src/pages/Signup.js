@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import SignupForm from '../components/forms/SignupForm'
+import AuthContext from "../context/Auth/AuthContext";
+import SignupForm from "../components/forms/SignupForm";
 
 const Signup = () => {
-    return (
-        <SignupForm />
-    )
-}
+	const { signup } = useContext(AuthContext);
+	const navigate = useNavigate();
 
-export default Signup
+	const handleSignup = async (user) => {
+		try {
+			await signup(user);
+			alert("Successfully registered");
+			navigate("/login");
+		} catch (err) {
+			alert(err.message);
+		}
+	};
+
+	return (
+		<div className="text-center">
+			<SignupForm signup={handleSignup} />
+		</div>
+	);
+};
+
+export default Signup;

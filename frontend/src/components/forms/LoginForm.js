@@ -22,7 +22,7 @@ const LoginForm = (props) => {
         <form onSubmit={handleSubmit}>
 			<div className="form-group m-3">
 				<label>Email</label>
-				<input    //placeholder
+				<input
 					name="email"
 					type="email"
 					className="form-control"
