@@ -19,8 +19,8 @@ const CitySelect = (props) => {
 	return (
 		<select className="form-select" onChange={handleChange}>
 			{cities.map((city) => (
-				<option id={city.id}>
-					{city.name}, {city.state} {city.country}
+				<option id={city.id} value={city.id}>
+					{city.name}, {city.state} - {city.country}
 				</option>
 			))}
 		</select>

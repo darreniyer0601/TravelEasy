@@ -38,30 +38,44 @@ const Navbar = () => {
 			<a className="navbar-brand m-2" href="/">
 				TravelEasy
 			</a>
-			<ul className="navbar-nav">
-				{authenticated && (
-					<Fragment>
-						<li className="nav-item">
-							<NavLink className="nav-link" to="/explore">
-								Explore
-							</NavLink>
-						</li>
-						<li className="nav-item">
-							<NavLink className="nav-link" to="/mytrips">
-								MyTrips
-							</NavLink>
-						</li>
-						<li className="nav-item">
-							<NavLink className="nav-link" to="/newtrip">
-								NewTrip
-							</NavLink>
-						</li>
-					</Fragment>
-				)}
-			</ul>
-			<ul className="navbar-nav position-absolute end-0 m-2">
-				{authenticated ? logoutButton : authLinks}
-			</ul>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul className="navbar-nav">
+					{authenticated && (
+						<Fragment>
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/explore">
+									Explore
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/mytrips">
+									MyTrips
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/newtrip">
+									NewTrip
+								</NavLink>
+							</li>
+						</Fragment>
+					)}
+				</ul>
+				<ul className="navbar-nav position-absolute end-0 m-2">
+					{authenticated ? logoutButton : authLinks}
+				</ul>
+			</div>
 		</nav>
 	);
 };

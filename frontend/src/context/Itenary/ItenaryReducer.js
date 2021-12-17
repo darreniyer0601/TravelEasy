@@ -16,17 +16,32 @@ const ItenaryReducer = (state, action) => {
         case HOTELS_LOADED:
             return {
                 ...state,
-                hotels: action.payload
+                hotels: action.payload,
+                itenary: {
+                    ...state.itenary,
+                    hotel: action.payload[0].id,
+                    hotel_price: action.payload[0].price_per_night
+                }
             }
         case VEHICLES_LOADED:
             return {
                 ...state,
-                vehicles: action.payload
+                vehicles: action.payload,
+                itenary: {
+                    ...state.itenary,
+                    vehicle: action.payload[0].id,
+                    vehicle_price: action.payload[0].price_per_hour
+                }
             }
         case CITIES_LOADED:
             return {
                 ...state,
-                cities: action.payload
+                cities: action.payload,
+                itenary: {
+                    ...state.itenary,
+                    origin: action.payload[0].id,
+                    destination: action.payload[0].id
+                }
             }
         case ITENARIES_LOADED:
             return {

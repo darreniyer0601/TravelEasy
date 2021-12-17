@@ -109,7 +109,7 @@ const ItenaryState = (props) => {
     const setOrigin = (id) => {
         dispatch({
             type: ORIGIN_SELECTED,
-            payload: id
+            payload: parseInt(id)
         })
     }
 
@@ -117,7 +117,7 @@ const ItenaryState = (props) => {
     const setDestination = (id) => {
         dispatch({
             type: DESTINATION_SELECTED,
-            payload: id
+            payload: parseInt(id)
         })
     }
 
@@ -149,7 +149,7 @@ const ItenaryState = (props) => {
     const setTravelTime = (time) => {
         dispatch({
             type: TRAVEL_TIME_SET,
-            payload: time
+            payload: parseInt(time)
         })
     }
 
