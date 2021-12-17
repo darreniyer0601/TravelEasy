@@ -170,10 +170,7 @@ const ItenaryState = (props) => {
                 destination: state.itenary.destination
             }
 
-            await axios.post('/api/routes', body);
-
-            // Get created route
-            let res = await axios.get('/api/routes');
+            let res = await axios.post('/api/routes', body);
 
             const route_id = res.data.result.id;
 
@@ -184,10 +181,7 @@ const ItenaryState = (props) => {
                 travel_time: state.itenary.travel_time
             }
 
-            await axios.post('/api/itenaries/vehicleroute', body);
-
-            // Get vehicle_route
-            res = await axios.get('/api/itenaries/vehicleroute');
+            res = await axios.post('/api/itenaries/vehicleroute', body);
 
             const route = res.data.result.id;
 
