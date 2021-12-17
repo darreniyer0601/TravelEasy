@@ -8,9 +8,12 @@ import Navbar from "./components/layout/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 
 // Pages
+import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import NewPlanPage from "./pages/NewPlanPage";
+import NewTripPage from "./pages/NewTripPage";
+import MyTripsPage from "./pages/MyTripsPage";
+import ExplorePage from "./pages/ExplorePage";
 
 // Context
 import AuthState from "./context/Auth/AuthState";
@@ -23,8 +26,10 @@ function App() {
 				<ItenaryState>
 					<Navbar />
 					<Routes>
-						{/* <PrivateRoute path='/' element={<Home />} /> */}
-						<Route path="/newplan" element={<NewPlanPage />} />
+						<Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
+						<Route path='/explore' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
+						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
+						<Route path="/newtrip" element={<PrivateRoute><NewTripPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>

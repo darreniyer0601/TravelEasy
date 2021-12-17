@@ -6,6 +6,8 @@ const userRoutes = require('./routes/user');
 const itenaryRoutes = require('./routes/itenaries');
 const routeRoutes = require('./routes/route');
 const hotelRoutes = require('./routes/hotels');
+const vehicleRoutes = require('./routes/transport');
+const cityRoutes = require('./routes/cities');
 
 require('dotenv').config();
 
@@ -18,14 +20,17 @@ app.use(cors());
 
 app.use((req, res, next) => {
     console.log(req.url, req.body);
+    // res.status(200).json({ msg: 'Route reached' });
     next();
 })
 
 // Register routes
 app.use('/api/user', userRoutes);
-app.use('/api/itenary', itenaryRoutes);
-app.use('/api/route', routeRoutes);
-app.use('/api/hotel', hotelRoutes);
+app.use('/api/itenaries', itenaryRoutes);
+app.use('/api/routes', routeRoutes);
+app.use('/api/hotels', hotelRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/cities', cityRoutes);
 
 connect().then(() => {
     console.log('MySQL Connected...');

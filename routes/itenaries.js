@@ -2,12 +2,13 @@ const express = require('express');
 const router =  express.Router();
 
 const itenaryController = require('../controllers/itenaries');
-const isAuth = require('../util/isAuth');
 
-router.get('/', isAuth, itenaryController.getItenaries);
+router.get('/', itenaryController.getItenaries);
 
-router.post('/', isAuth, itenaryController.addItenary);
+router.post('/', itenaryController.addItenary);
 
-router.delete('/:id', isAuth, itenaryController.deleteItenary);
+router.post('/vehicleroute', itenaryController.addVehicleRoute);
+
+router.delete('/:id', itenaryController.deleteItenary);
 
 module.exports = router;
