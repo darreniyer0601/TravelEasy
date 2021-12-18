@@ -18,7 +18,6 @@ const ExplorePage = () => {
 	const [showToast, setShowToast] = useState(false);
 
 	useEffect(() => {
-		console.log("effect", itenaries.length);
 		if (itenaries.length === 0) {
 			getItenaries();
 		}
