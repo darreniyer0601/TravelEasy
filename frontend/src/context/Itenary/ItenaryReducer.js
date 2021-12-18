@@ -9,7 +9,8 @@ import {
     DESTINATION_SELECTED,
     DAYS_ALLOCATED,
     TRAVEL_TIME_SET,
-    ITENARY_ADDED
+    ITENARY_ADDED,
+    ITENARY_FILTERED
 } from '../types';
 
 const ItenaryReducer = (state, action) => {
@@ -53,6 +54,12 @@ const ItenaryReducer = (state, action) => {
             return {
                 ...state,
                 itenaries: [action.payload, ...state.itenaries],
+            }
+        case ITENARY_FILTERED:
+            return {
+                ...state,
+                itenariesFiltered: action.payload,
+                filtered: true
             }
         case HOTEL_SELECTED:
             return {
