@@ -26,8 +26,7 @@ function App() {
 				<ItenaryState>
 					<Navbar />
 					<Routes>
-						<Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
-						<Route path='/explore' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
+						<Route path='/' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
 						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
 						<Route path="/newtrip" element={<PrivateRoute><NewTripPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />

@@ -7,7 +7,7 @@ const ItineraryCard = ({ itenary }) => {
 			<div class="row no-gutters">
 				<div class="col-auto">
 					<Card.Img
-						src={`https://picsum.photos/id/${itenary.id * (100 - Math.random(10).toFixed())}/300/200`}
+						src={`https://picsum.photos/id/${itenary.id * (100 - Math.random(10).toFixed())}/300/250`}
 						class="img-fluid"
 						alt=""
 					></Card.Img>
