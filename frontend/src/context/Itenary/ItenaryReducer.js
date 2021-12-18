@@ -11,7 +11,8 @@ import {
     TRAVEL_TIME_SET,
     ITENARY_ADDED,
     ITENARY_FILTERED,
-    USER_ITENARIES_LOADED
+    USER_ITENARIES_LOADED,
+    CLEAR_FILTER
 } from '../types';
 
 const ItenaryReducer = (state, action) => {
@@ -61,6 +62,12 @@ const ItenaryReducer = (state, action) => {
                 ...state,
                 filtered_itenaries: action.payload,
                 filtered: true
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtered_itenaries: [],
+                filtered: false
             }
         case USER_ITENARIES_LOADED:
             return {

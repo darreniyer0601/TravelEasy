@@ -12,12 +12,13 @@ const ExplorePage = () => {
 		filtered_itenaries,
 		getItenaries,
 		getItenariresByPrice,
+		clearFilter,
 	} = useContext(ItenaryContext);
 
 	const [showToast, setShowToast] = useState(false);
 
 	useEffect(() => {
-        console.log('effect', itenaries.length);
+		console.log("effect", itenaries.length);
 		if (itenaries.length === 0) {
 			getItenaries();
 		}
@@ -33,6 +34,10 @@ const ExplorePage = () => {
 		setShowToast(true);
 	};
 
+	const handleClear = () => {
+		clearFilter();
+	};
+
 	const handleFilters = (prices) => {
 		getItenariresByPrice(prices);
 		setShowToast(false);
@@ -40,16 +45,27 @@ const ExplorePage = () => {
 
 	return (
 		<>
-			<button
-				type="button"
-				className="btn btn-warning m-3"
-				onClick={handleFilterSelect}
-			>
-				Filter By Price
-			</button>
+			{!filtered && (
+				<button
+					type="button"
+					className="btn btn-warning m-3"
+					onClick={handleFilterSelect}
+				>
+					Filter By Price
+				</button>
+			)}
+			{filtered && (
+				<button
+					type="button"
+					className="btn btn-warning m-3"
+					onClick={handleClear}
+				>
+					Clear Filter
+				</button>
+			)}
 			<Modal show={showToast} centered className="text-center">
 				<Modal.Header>
-					<Modal.Title>Select Dates</Modal.Title>
+					<Modal.Title>Select Price Range</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<PriceForm handleFilters={handleFilters} />

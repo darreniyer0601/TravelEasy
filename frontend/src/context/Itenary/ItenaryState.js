@@ -17,7 +17,8 @@ import {
     TRAVEL_TIME_SET,
     ITENARY_ADDED,
     ITENARY_FILTERED,
-    USER_ITENARIES_LOADED
+    USER_ITENARIES_LOADED,
+    CLEAR_FILTER
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5000/';
@@ -134,6 +135,12 @@ const ItenaryState = (props) => {
                 alert(err.response.data.msg);
             }
         }
+    }
+
+    const clearFilter = () => {
+        dispatch({
+            type: CLEAR_FILTER
+        })
     }
 
     // Select hotel
@@ -261,7 +268,8 @@ const ItenaryState = (props) => {
             allocateDays,
             setTravelTime,
             addItenary,
-            getUserItenaries
+            getUserItenaries,
+            clearFilter
         }}>
             {props.children}
         </ItenaryContext.Provider>
