@@ -8,7 +8,6 @@ import Navbar from "./components/layout/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 
 // Pages
-import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewTripPage from "./pages/NewTripPage";
@@ -26,8 +25,7 @@ function App() {
 				<ItenaryState>
 					<Navbar />
 					<Routes>
-						<Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
-						<Route path='/explore' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
+						<Route path='/' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
 						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
 						<Route path="/newtrip" element={<PrivateRoute><NewTripPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />

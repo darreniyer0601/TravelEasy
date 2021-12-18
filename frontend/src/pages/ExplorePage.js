@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ItenaryContext from '../context/Itenary/ItenaryContext';
 
+import ItineraryCard from '../components/ItineraryCard';
+
 const ExplorePage = () => {
     const { itenaries, itenariesFiltered, filtered, getItenaries, getItenariresByPrice } = useContext(ItenaryContext);
     const [showToast, setShowToast] = useState(false);

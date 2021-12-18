@@ -16,13 +16,15 @@ import {
     DAYS_ALLOCATED,
     TRAVEL_TIME_SET,
     ITENARY_ADDED,
-    ITENARY_FILTERED
+    ITENARY_FILTERED,
+    USER_ITENARIES_LOADED
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5020/';
 
 const initialState = {
     itenaries: [],
+    user_itenaries: [],
     hotels: [],
     vehicles: [],
     cities: [],
@@ -98,6 +100,14 @@ const ItenaryState = (props) => {
                 alert(err.response.data.msg);
             }
         }
+    }
+
+    // Get user's itenaries
+    const getUserItenaries = (userId) => {
+        dispatch({
+            type: USER_ITENARIES_LOADED,
+            payload: userId
+        })
     }
 
     // Fetch itenaries from backend
@@ -255,7 +265,8 @@ const ItenaryState = (props) => {
             setVehicle,
             allocateDays,
             setTravelTime,
-            addItenary
+            addItenary,
+            getUserItenaries
         }}>
             {props.children}
         </ItenaryContext.Provider>
