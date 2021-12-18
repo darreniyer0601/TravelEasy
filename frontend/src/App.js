@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import NewTripPage from "./pages/NewTripPage";
 import MyTripsPage from "./pages/MyTripsPage";
 import ExplorePage from "./pages/ExplorePage";
+import StatsPage from "./pages/StatsPage";
 
 // Context
 import AuthState from "./context/Auth/AuthState";
@@ -28,6 +29,7 @@ function App() {
 						<Route path='/' element={<PrivateRoute><ExplorePage /></PrivateRoute>} />
 						<Route path='/mytrips' element={<PrivateRoute><MyTripsPage /></PrivateRoute>} />
 						<Route path="/newtrip" element={<PrivateRoute><NewTripPage /></PrivateRoute>} />
+						<Route path='/stats' element={<PrivateRoute><StatsPage /></PrivateRoute>} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/signup" element={<Signup />} />
 					</Routes>

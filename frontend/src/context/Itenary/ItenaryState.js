@@ -18,7 +18,8 @@ import {
     ITENARY_ADDED,
     ITENARY_FILTERED,
     USER_ITENARIES_LOADED,
-    CLEAR_FILTER
+    CLEAR_FILTER,
+    STATS_LOADED
 } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5000/';
@@ -31,6 +32,12 @@ const initialState = {
     vehicles: [],
     cities: [],
     filtered: false,
+    stats: {
+        top_hotel: null,
+        top_city: null,
+        total_itenaries: 0,
+        total_users: 0
+    },
     itenary: {
         origin: null,
         destination: null,
@@ -100,6 +107,38 @@ const ItenaryState = (props) => {
             type: USER_ITENARIES_LOADED,
             payload: userId
         })
+    }
+
+    // Get statistics 
+    const getStatistics = async () => {
+        try {
+            let res = await axios.get('/api/itenaries/total');
+
+            const payload = {
+                itenaries: res.data.result.total
+            };
+
+            res = await axios.get('/api/itenaries/total/user');
+
+            payload.users = res.data.result.total;
+
+            res = await axios.get('/api/itenaries/top/hotel');
+
+            payload.hotel = res.data.result;
+
+            res = await axios.get('/api/itenaries/top/city');
+
+            payload.city = res.data.result;
+
+            dispatch({
+                type: STATS_LOADED,
+                payload
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
+        }
     }
 
     // Fetch itenaries from backend
@@ -285,7 +324,8 @@ const ItenaryState = (props) => {
             setTravelTime,
             addItenary,
             getUserItenaries,
-            clearFilter
+            clearFilter,
+            getStatistics
         }}>
             {props.children}
         </ItenaryContext.Provider>

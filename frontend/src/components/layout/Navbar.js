@@ -68,6 +68,10 @@ const Navbar = () => {
 								<NavLink className="nav-link" to="/newtrip">
 									NewTrip
 								</NavLink>
+							</li><li className="nav-item">
+								<NavLink className="nav-link" to="/stats">
+									Statistics
+								</NavLink>
 							</li>
 						</Fragment>
 					)}
