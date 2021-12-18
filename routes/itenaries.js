@@ -5,6 +5,8 @@ const itenaryController = require('../controllers/itenaries');
 
 router.get('/', itenaryController.getItenaries);
 
+router.get('/', itenaryController.getItenariesByPrice);
+
 router.post('/', itenaryController.addItenary);
 
 router.post('/vehicleroute', itenaryController.addVehicleRoute);

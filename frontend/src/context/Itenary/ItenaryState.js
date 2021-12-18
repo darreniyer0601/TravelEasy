@@ -16,10 +16,11 @@ import {
     DAYS_ALLOCATED,
     TRAVEL_TIME_SET,
     ITENARY_ADDED,
+    ITENARY_FILTERED,
     USER_ITENARIES_LOADED
 } from '../types';
 
-axios.defaults.baseURL = 'http://localhost:5000/';
+axios.defaults.baseURL = 'http://localhost:5020/';
 
 const initialState = {
     itenaries: [],
@@ -27,6 +28,7 @@ const initialState = {
     hotels: [],
     vehicles: [],
     cities: [],
+    filtered: false,
     itenary: {
         origin: null,
         destination: null,
@@ -36,6 +38,16 @@ const initialState = {
         travel_time: 0,
         hotel_price: 0,
         vehicle_price: 0,
+    },
+    itenariesFiltered: {
+        origin: null,
+        destination: null,
+        vehicle: null,
+        hotel: null,
+        days: 0,
+        travel_time: 0,
+        hotel_price: 0,
+        vehicle_price: 0
     }
 }
 
@@ -105,6 +117,21 @@ const ItenaryState = (props) => {
 
             dispatch({
                 type: ITENARIES_LOADED,
+                payload: res.data.itenaries
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
+        }
+    }
+
+    const getItenariresByPrice = async () => {
+        try {
+            const res = await axios.get('/api/itenaries');
+
+            dispatch({
+                type: ITENARY_FILTERED,
                 payload: res.data.itenaries
             })
         } catch (err) {
@@ -231,6 +258,7 @@ const ItenaryState = (props) => {
             getVehicles,
             getCities,
             getItenaries,
+            getItenariresByPrice,
             setHotel,
             setOrigin,
             setDestination,
