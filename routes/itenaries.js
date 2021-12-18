@@ -7,7 +7,7 @@ router.get('/', itenaryController.getItenaries);
 
 router.get('/price/:min_price/:max_price', itenaryController.getItenariesByPrice);
 
-router.get('/', itenaryController.getItenariesByPrice);
+router.get('/destination/:id', itenaryController.getItenariesByDestination);
 
 router.post('/', itenaryController.addItenary);
 

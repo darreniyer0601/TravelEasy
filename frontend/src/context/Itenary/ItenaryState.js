@@ -137,6 +137,21 @@ const ItenaryState = (props) => {
         }
     }
 
+    const getItenariesByDestination = async (id) => {
+        try {
+            const res = await axios.get(`/api/itenaries/destination/${id}`);
+
+            dispatch({
+                type: ITENARY_FILTERED,
+                payload: res.data.itenaries
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg);
+            }
+        }
+    }
+
     const clearFilter = () => {
         dispatch({
             type: CLEAR_FILTER
@@ -261,6 +276,7 @@ const ItenaryState = (props) => {
             getCities,
             getItenaries,
             getItenariresByPrice,
+            getItenariesByDestination,
             setHotel,
             setOrigin,
             setDestination,
