@@ -1,92 +1,73 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import ItenaryContext from '../context/Itenary/ItenaryContext';
+import React, { useState, useContext, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
+import ItenaryContext from "../context/Itenary/ItenaryContext";
 
-import ItineraryCard from '../components/ItineraryCard';
+import ItineraryCard from "../components/ItineraryCard";
+import PriceForm from "../components/forms/PriceForm";
 
 const ExplorePage = () => {
-    const { itenaries, itenariesFiltered, filtered, getItenaries, getItenariresByPrice } = useContext(ItenaryContext);
-    const [showToast, setShowToast] = useState(false);
+	const {
+		itenaries,
+		filtered,
+		filtered_itenaries,
+		getItenaries,
+		getItenariresByPrice,
+		clearFilter,
+	} = useContext(ItenaryContext);
 
-    const [it, setIt] = useState(itenaries);
+	const [showToast, setShowToast] = useState(false);
 
-    const [formData, setFormData] = useState({
-		min_price: '',
-		max_price: ''
-	})
+	useEffect(() => {
+		if (itenaries.length === 0) {
+			getItenaries();
+		}
 
-	const handleChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value
-		})
-	}
+		// eslint-disable-next-line
+	}, []);
 
-    useEffect(() => {
-        if (itenaries.length === 0) {
-            getItenaries();
-        }
-
-        if (filtered) {
-            setIt(itenariesFiltered);
-        }
-
-        // eslint-disable-next-line
-    }, [filtered])
-
-    const handleClose = () => {
+	const handleClose = () => {
 		setShowToast(false);
 	};
 
-    const handleFilterSelect = () => {
+	const handleFilterSelect = () => {
 		setShowToast(true);
-	}
+	};
 
-	const handleFilters = (filters) => {
-		getItenariresByPrice(filters);
+	const handleClear = () => {
+		clearFilter();
+	};
+
+	const handleFilters = (prices) => {
+		getItenariresByPrice(prices);
 		setShowToast(false);
 	};
 
-    return (
-        <>
-            <button
-				type="button"
-				className="btn btn-warning m-3"
-				onClick={handleFilterSelect}
-			>
-				Filter By Price
-			</button>
+	return (
+		<>
+			{!filtered && (
+				<button
+					type="button"
+					className="btn btn-warning m-3"
+					onClick={handleFilterSelect}
+				>
+					Filter By Price
+				</button>
+			)}
+			{filtered && (
+				<button
+					type="button"
+					className="btn btn-warning m-3"
+					onClick={handleClear}
+				>
+					Clear Filter
+				</button>
+			)}
 			<Modal show={showToast} centered className="text-center">
 				<Modal.Header>
-					<Modal.Title>Select Dates</Modal.Title>
+					<Modal.Title>Select Price Range</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{/* <DateForm setDates={handleFilters} /> */}
-                    <form onSubmit={handleFilters}>
-                        <div className="form-group m-3">
-                            <label>Minimum Price</label>
-                            <input
-                                name="min_price"
-                                type="text"
-                                className="form-control"
-                                required
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group m-3">
-                            <label>Maximum Price</label>
-                            <input
-                                name="max_price"
-                                type="text"
-                                className="form-control"
-                                required
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-dark">
-                            Search
-                        </button>
-                    </form>
+					<PriceForm handleFilters={handleFilters} />
 				</Modal.Body>
 				<Modal.Footer className="text-center">
 					<Button className="btn-danger" onClick={handleClose}>
@@ -95,22 +76,15 @@ const ExplorePage = () => {
 				</Modal.Footer>
 			</Modal>
 
-            <div className='d-flex flex-row'>
-                {
-                it.map(itenary => (
-                    <div className='card m-2 p-2'>
-                        <p>Origin: {itenary.origin}</p>
-                        <p>Destination: {itenary.destination}</p>
-                        <p>Travelling by {itenary.vehicle}</p>
-                        <p>Staying at: {itenary.hotel}</p>
-                        <p>Staying for {itenary.days} days</p>
-                        <p>Total Expenditures: ${itenary.price}</p>
-                    </div>
-                ))
-}
-            </div>
-        </>
-    )
-}
+			<div className="d-flex flex-row flex-wrap">
+				{filtered
+					? filtered_itenaries.map((itenary) => (
+							<ItineraryCard itenary={itenary} />
+					  ))
+					: itenaries.map((itenary) => <ItineraryCard itenary={itenary} />)}
+			</div>
+		</>
+	);
+};
 
-export default ExplorePage
+export default ExplorePage;
