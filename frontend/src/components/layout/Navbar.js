@@ -55,7 +55,7 @@ const Navbar = () => {
 					{authenticated && (
 						<Fragment>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/explore">
+								<NavLink className="nav-link" to="/">
 									Explore
 								</NavLink>
 							</li>

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import ItenaryContext from '../context/Itenary/ItenaryContext';
 
+import ItineraryCard from '../components/ItineraryCard';
+
 const ExplorePage = () => {
     const { itenaries, getItenaries } = useContext(ItenaryContext);
 
@@ -13,16 +15,9 @@ const ExplorePage = () => {
     }, [])
 
     return (
-        <div className='d-flex flex-row'>
+        <div className='d-flex flex-row flex-wrap'>
             {itenaries.map(itenary => (
-                <div className='card m-2 p-2'>
-                    <p>Origin: {itenary.origin}</p>
-                    <p>Destination: {itenary.destination}</p>
-                    <p>Travelling by {itenary.vehicle}</p>
-                    <p>Staying at: {itenary.hotel}</p>
-                    <p>Staying for {itenary.days} days</p>
-                    <p>Total Expenditures: ${itenary.price}</p>
-                </div>
+                <ItineraryCard itenary={itenary} />
             ))}
         </div>
     )
