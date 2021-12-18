@@ -4,15 +4,15 @@ import Card from "react-bootstrap/Card";
 const ItineraryCard = ({ itenary }) => {
 	return (
 		<Card style={{ width: "45rem" }} className="m-3">
-			<div class="row no-gutters">
-				<div class="col-auto">
+			<div className="row no-gutters">
+				<div className="col-auto">
 					<Card.Img
 						src={`https://picsum.photos/id/${itenary.id * (100 - Math.random(10).toFixed())}/300/250`}
 						class="img-fluid"
 						alt=""
 					></Card.Img>
 				</div>
-				<div class="col">
+				<div className="col">
 					<Card.Body>
 						<Card.Title>Itenary #{itenary.id}</Card.Title>
 						<Card.Text>From: {itenary.origin}</Card.Text>

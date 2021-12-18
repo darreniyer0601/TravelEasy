@@ -28,7 +28,8 @@ exports.getItenaries = (req, res) => {
 };
 
 exports.getItenariesByPrice = (req, res) => {
-	const { minPrice, maxPrice } = req.body;
+	const min_price = req.params.min_price;
+	const max_price = req.params.max_price;
 
 	try {
 		db.query(
@@ -39,7 +40,7 @@ exports.getItenariesByPrice = (req, res) => {
 				db.beginTransaction();
 
 				const sql =
-					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and i.price >= " + db.escape(minPrice) + " and i.price <= " + db.escape(maxPrice) + ";";
+					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and i.price >= " + db.escape(min_price) + " and i.price <= " + db.escape(max_price) + ";";
 
 				db.query(sql, (err, result) => {
 					if (err) throw err;

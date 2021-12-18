@@ -59,7 +59,7 @@ const ItenaryReducer = (state, action) => {
         case ITENARY_FILTERED:
             return {
                 ...state,
-                itenariesFiltered: action.payload,
+                filtered_itenaries: action.payload,
                 filtered: true
             }
         case USER_ITENARIES_LOADED:

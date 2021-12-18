@@ -20,11 +20,12 @@ import {
     USER_ITENARIES_LOADED
 } from '../types';
 
-axios.defaults.baseURL = 'http://localhost:5020/';
+axios.defaults.baseURL = 'http://localhost:5000/';
 
 const initialState = {
     itenaries: [],
     user_itenaries: [],
+    filtered_itenaries: [],
     hotels: [],
     vehicles: [],
     cities: [],
@@ -39,16 +40,6 @@ const initialState = {
         hotel_price: 0,
         vehicle_price: 0,
     },
-    itenariesFiltered: {
-        origin: null,
-        destination: null,
-        vehicle: null,
-        hotel: null,
-        days: 0,
-        travel_time: 0,
-        hotel_price: 0,
-        vehicle_price: 0
-    }
 }
 
 const ItenaryState = (props) => {
@@ -126,9 +117,13 @@ const ItenaryState = (props) => {
         }
     }
 
-    const getItenariresByPrice = async () => {
+    const getItenariresByPrice = async (prices) => {
+        
         try {
-            const res = await axios.get('/api/itenaries');
+            const min_price = parseInt(prices.min_price);
+            const max_price = parseInt(prices.max_price);
+
+            const res = await axios.get(`/api/itenaries/price/${min_price}/${max_price}`);
 
             dispatch({
                 type: ITENARY_FILTERED,

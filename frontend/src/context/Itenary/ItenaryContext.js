@@ -5,6 +5,7 @@ const initialState = {
     hotels: [],
     vehicles: [],
     user_itenaries: [],
+    filtered_itenaries: [],
     cities: [],
     filtered: false,
     itenary: {
@@ -15,14 +16,6 @@ const initialState = {
         days: 0,
         travel_time: 0
     },
-    itenariesFiltered: {
-        origin: null,
-        destination: null,
-        vehicle: null,
-        hotel: null,
-        days: 0,
-        travel_time: 0
-    }
 }
 
 const ItenaryContext = React.createContext({
@@ -31,7 +24,7 @@ const ItenaryContext = React.createContext({
     getVehicles: () => {},
     getCities: () => {},
     getItenaries: () => {},
-    getItenariresByPrice: (min_price, max_price) => {},
+    getItenariresByPrice: (prices) => {},
     getUserItenaries: (userId) => {},
     setHotel: (id) => {},
     setOrigin: (id) => {},
