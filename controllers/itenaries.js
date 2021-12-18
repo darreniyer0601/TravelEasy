@@ -40,7 +40,11 @@ exports.getItenariesByPrice = (req, res) => {
 				db.beginTransaction();
 
 				const sql =
-					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and i.price >= " + db.escape(min_price) + " and i.price <= " + db.escape(max_price) + ";";
+					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and i.price >= " +
+					db.escape(min_price) +
+					" and i.price <= " +
+					db.escape(max_price) +
+					";";
 
 				db.query(sql, (err, result) => {
 					if (err) throw err;
@@ -69,7 +73,9 @@ exports.getItenariesByDestination = (req, res) => {
 				db.beginTransaction();
 
 				const sql =
-					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and r.destination = " + db.escape(destination) + ";"
+					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and r.destination = " +
+					db.escape(destination) +
+					";";
 
 				db.query(sql, (err, result) => {
 					if (err) throw err;
@@ -120,7 +126,7 @@ exports.addItenary = (req, res) => {
 					db.commit();
 
 					res.status(200).json({ itenary: result[0] });
-				})
+				});
 			});
 		});
 	} catch (err) {
@@ -179,6 +185,112 @@ exports.addVehicleRoute = (req, res) => {
 				});
 			});
 		});
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: "Server error" });
+	}
+};
+
+exports.getTotalUsers = (req, res) => {
+	try {
+		db.query(
+			"SET TRANSACTION ISOLATION LEVEL READ COMMITTED;",
+			(err, result) => {
+				if (err) throw err;
+
+				db.beginTransaction();
+
+				const sql = "select count(*) as total from users;";
+
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+
+					db.commit();
+
+					res.status(200).json({ result: result[0] });
+				});
+			}
+		);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: "Server error" });
+	}
+};
+
+exports.getTotalItenaries = (req, res) => {
+	try {
+		db.query(
+			"SET TRANSACTION ISOLATION LEVEL READ COMMITTED;",
+			(err, result) => {
+				if (err) throw err;
+
+				db.beginTransaction();
+
+				const sql = "select count(*) as total from itenaries;";
+
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+
+					db.commit();
+
+					res.status(200).json({ result: result[0] });
+				});
+			}
+		);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: "Server error" });
+	}
+};
+
+exports.getTopHotel = (req, res) => {
+	try {
+		db.query(
+			"SET TRANSACTION ISOLATION LEVEL READ COMMITTED;",
+			(err, result) => {
+				if (err) throw err;
+
+				db.beginTransaction();
+
+				const sql =
+					"select h.name as hotel, count(*) as resided from itenaries i, hotels h where i.hotel = h.id group by h.name order by resided desc limit 1;";
+
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+
+					db.commit();
+
+					res.status(200).json({ result: result[0] });
+				});
+			}
+		);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: "Server error" });
+	}
+};
+
+exports.getTopDestination = (req, res) => {
+	try {
+		db.query(
+			"SET TRANSACTION ISOLATION LEVEL READ COMMITTED;",
+			(err, result) => {
+				if (err) throw err;
+
+				db.beginTransaction();
+
+				const sql =
+					"select c.name as destination, count(*) as visited from itenaries i, vehicle_route vr, route r, cities c where i.route = vr.id and vr.route_id = r.id and r.destination = c.id group by destination order by visited desc limit 1;";
+
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+
+					db.commit();
+
+					res.status(200).json({ result: result[0] });
+				});
+			}
+		);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).json({ msg: "Server error" });

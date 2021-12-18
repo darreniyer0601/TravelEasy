@@ -8,6 +8,12 @@ const initialState = {
     filtered_itenaries: [],
     cities: [],
     filtered: false,
+    stats: {
+        top_hotel: null,
+        top_city: null,
+        total_itenaries: 0,
+        total_users: 0
+    },
     itenary: {
         origin: null,
         destination: null,
@@ -34,7 +40,8 @@ const ItenaryContext = React.createContext({
     allocateDays: (dates) => {},
     setTravelTime: (time) => {},
     addItenary: (userId) => {},
-    clearFilter: () => {}
+    clearFilter: () => {},
+    getStatistics: () => {}
 });
 
 export default ItenaryContext;

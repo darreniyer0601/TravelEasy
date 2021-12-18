@@ -12,7 +12,8 @@ import {
     ITENARY_ADDED,
     ITENARY_FILTERED,
     USER_ITENARIES_LOADED,
-    CLEAR_FILTER
+    CLEAR_FILTER,
+    STATS_LOADED
 } from '../types';
 
 const ItenaryReducer = (state, action) => {
@@ -68,6 +69,16 @@ const ItenaryReducer = (state, action) => {
                 ...state,
                 filtered_itenaries: [],
                 filtered: false
+            }
+        case STATS_LOADED:
+            return {
+                ...state,
+                stats: {
+                    top_hotel: action.payload.hotel,
+                    top_city: action.payload.city,
+                    total_itenaries: action.payload.itenaries,
+                    total_users: action.payload.users
+                }
             }
         case USER_ITENARIES_LOADED:
             return {
