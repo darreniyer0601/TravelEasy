@@ -4,6 +4,7 @@ const initialState = {
     itenaries: [],
     hotels: [],
     vehicles: [],
+    user_itenaries: [],
     cities: [],
     itenary: {
         origin: null,
@@ -21,6 +22,7 @@ const ItenaryContext = React.createContext({
     getVehicles: () => {},
     getCities: () => {},
     getItenaries: () => {},
+    getUserItenaries: (userId) => {},
     setHotel: (id) => {},
     setOrigin: (id) => {},
     setDestination: (id) => {},

@@ -8,7 +8,6 @@ import Navbar from "./components/layout/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 
 // Pages
-import Home from './pages/Home';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewTripPage from "./pages/NewTripPage";
