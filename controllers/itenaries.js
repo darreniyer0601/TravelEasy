@@ -57,6 +57,35 @@ exports.getItenariesByPrice = (req, res) => {
 	}
 };
 
+exports.getItenariesByDestination = (req, res) => {
+	const destination = req.params.id;
+
+	try {
+		db.query(
+			"SET TRANSACTION ISOLATION LEVEL READ COMMITTED;",
+			(err, result) => {
+				if (err) throw err;
+
+				db.beginTransaction();
+
+				const sql =
+					"select i.id, i.user_id, h.name as hotel, c1.name as origin, c2.name as destination, v.type as vehicle, i.days, i.price from itenaries i, hotels h, vehicle_route vr, vehicles v, route r, cities c1, cities c2 where i.hotel = h.id and i.route = vr.id and vr.vehicle_id = v.id and vr.route_id = r.id and r.origin = c1.id and r.destination = c2.id and r.destination = " + db.escape(destination) + ";"
+
+				db.query(sql, (err, result) => {
+					if (err) throw err;
+
+					db.commit();
+
+					res.status(200).json({ itenaries: result });
+				});
+			}
+		);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: "Server error" });
+	}
+};
+
 exports.addItenary = (req, res) => {
 	const { days, hotel, route, price, user_id } = req.body;
 

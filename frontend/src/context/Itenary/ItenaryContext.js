@@ -25,6 +25,7 @@ const ItenaryContext = React.createContext({
     getCities: () => {},
     getItenaries: () => {},
     getItenariresByPrice: (prices) => {},
+    getItenariesByDestination: (city) => {},
     getUserItenaries: (userId) => {},
     setHotel: (id) => {},
     setOrigin: (id) => {},
